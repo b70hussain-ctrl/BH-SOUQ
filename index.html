@@ -16,7 +16,7 @@
     <div id="currency-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
         <div class="bg-[#111c38] border border-cyan-500/30 p-6 sm:p-8 rounded-2xl shadow-2xl max-w-sm sm:max-w-md w-full text-center">
             <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 rounded-2xl overflow-hidden border-2 border-cyan-400 shadow-lg bg-gray-900/90 flex items-center justify-center p-2">
-                <img src="IMG_0637.PNG" alt="BH SOUQ Logo" class="w-full h-full object-contain">
+                <img src="IMG_0637.png" alt="BH SOUQ Logo" class="w-full h-full object-contain">
             </div>
             <h2 class="text-xl sm:text-2xl font-bold text-cyan-400 mb-2">مرحباً بك في BH SOUQ</h2>
             <p class="text-gray-300 mb-6 text-xs sm:text-sm">الرجاء اختيار العملة المفضلة لديك لعرض الأسعار:</p>
@@ -34,7 +34,7 @@
         <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2 sm:gap-3">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden border border-cyan-400 bg-gray-900 flex items-center justify-center p-1 flex-shrink-0">
-                    <img src="IMG_0637.PNG" alt="Logo" class="w-full h-full object-contain">
+                    <img src="IMG_0637.png" alt="Logo" class="w-full h-full object-contain">
                 </div>
                 <div>
                     <h1 class="text-base sm:text-xl font-black text-cyan-400 tracking-wider">BH SOUQ</h1>
@@ -67,12 +67,16 @@
         </div>
     </main>
 
-    <!-- نافذة تكبير واستعراض المنتج (Lightbox Modal) -->
+    <!-- نافذة تكبير واستعراض المنتج (مع معرض الصور للماوس) -->
     <div id="product-zoom-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/95 backdrop-blur-md p-3 sm:p-4">
         <div class="relative max-w-3xl w-full bg-[#111c38] border border-cyan-500/40 rounded-2xl overflow-hidden shadow-2xl p-4 sm:p-6 flex flex-col md:flex-row gap-4 sm:gap-6 max-h-[90vh] overflow-y-auto">
             <button onclick="closeZoomModal()" class="absolute top-3 left-3 text-gray-400 hover:text-white bg-gray-800/80 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-lg z-10 transition">✕</button>
-            <div class="w-full md:w-1/2 h-56 sm:h-80 bg-gray-900 rounded-xl overflow-hidden flex items-center justify-center border border-gray-800 p-2">
-                <img id="zoom-modal-img" src="" alt="Zoomed Product" class="w-full h-full object-contain">
+            <div class="w-full md:w-1/2 flex flex-col gap-3">
+                <div class="h-56 sm:h-72 bg-gray-900 rounded-xl overflow-hidden flex items-center justify-center border border-gray-800 p-2">
+                    <img id="zoom-modal-img" src="" alt="Zoomed Product" class="w-full h-full object-contain">
+                </div>
+                <!-- معرض الصور المصغرة -->
+                <div id="zoom-thumbnails" class="flex gap-2 justify-center overflow-x-auto py-1"></div>
             </div>
             <div class="w-full md:w-1/2 flex flex-col justify-between">
                 <div>
@@ -81,7 +85,11 @@
                     <p id="zoom-modal-desc" class="text-gray-300 text-xs sm:text-sm mb-4 leading-relaxed whitespace-pre-line"></p>
                 </div>
                 <div>
-                    <div id="zoom-modal-price" class="text-xl sm:text-2xl font-black text-cyan-400 mb-4"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div id="zoom-modal-price" class="text-xl sm:text-2xl font-black text-cyan-400"></div>
+                        <div id="zoom-modal-old-price" class="text-sm text-gray-400 line-through"></div>
+                        <div id="zoom-modal-badge" class="bg-orange-500 text-white text-xs font-black px-2 py-0.5 rounded-lg"></div>
+                    </div>
                     <div class="flex gap-2 sm:gap-3">
                         <button id="zoom-add-cart-btn" class="flex-1 bg-gray-800 hover:bg-gray-700 text-cyan-400 border border-cyan-500/30 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition">إضافة للسلة 🛒</button>
                         <button id="zoom-buy-btn" class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition shadow-md shadow-cyan-600/20">اطلب الآن 🚀</button>
@@ -154,22 +162,37 @@
         let currentCurrency = 'BHD';
         let currentSymbol = 'د.ب';
 
+        // قائمة المنتجات مع الأسماء الصحيحة للصور التي في جهازك
         const products = [
             {
                 id: 1,
                 name: "GEMINI PRO - جيمني برو (اشتراك 12 شهر)",
                 category: "digital",
-                priceBHD: 2.990,
-                image: "IMG_0639.PNG",
+                priceBHD: 2.900,
+                oldPriceBHD: 6.500,
+                discount: "خصم 55%",
+                images: ["IMG_0639.png"],
                 description: "👑 اشتراك خاص وعلى حسابك الشخصي وآمن ١٠٠٪؜\n🚀 أداء فائق السرعة والتميز!\n📊 تحليل بيانات متقدم ودقيق للغاية.\n🪄 توليد محتوى إبداعي وابتكاري بلا حدود.\n🌐 دعم لغات متعددة واحترافية عالية.\n✨ تفعيل فوري ومباشر على حسابك الخاص!"
             },
             {
                 id: 2,
-                name: "منتج تجريبي عام (تجربة متجر)",
+                name: "CANVA PRO - كانفا برو (اشتراك شهر)",
+                category: "digital",
+                priceBHD: 1.600,
+                oldPriceBHD: 3.500,
+                discount: "خصم 54%",
+                images: ["IMG_0678.png"],
+                description: "🎨 وصول كامل لكافة ميزات كانفا برو بلا حدود!\n📚 مكتبة قوالب وعناصر ضحمة وحصرية.\n✨ أدوات تصميم احترافية ومتقدمة.\n☁️ تحديثات مستمرة وحفظ سحابي آمن.\n🛡️ اشتراك صالح لمدة شهر بـ ضمان كامل المدة!"
+            },
+            {
+                id: 3,
+                name: "ATTACK SHARK X11 Mouse",
                 category: "physical",
-                priceBHD: 5.000,
-                image: "IMG_0637.PNG",
-                description: "📦 منتج تجريبي عالي الجودة ومميز مخصص للاختبار والتجربة السريعة داخل متجرنا الإلكتروني."
+                priceBHD: 14.200,
+                oldPriceBHD: 15.900,
+                discount: "خصم 11%",
+                images: ["IMG_0674.png", "IMG_0675.png", "IMG_0676.png"],
+                description: "🖱️ ماوس الألعاب الاحترافي الخارق ATTACK SHARK X11!\n🪶 وزن خارق الخفة 49 جرام فقط لسرعة حركة فائقة.\n🎯 مزود بمستشعر دقيق وعالي الأداء PAW3311.\n🔋 بطارية عملاقة تدوم حتى 130 ساعة من اللعب.\n⚡ اتصال ثلاثي الأوضاع (2.4G لاسلكي، بلوتوث 5.2، وسلكي Type-C).\n💡 يأتي مع قاعدة شحن RGB أنيقة ومميزة!"
             }
         ];
 
@@ -214,9 +237,12 @@
                 card.innerHTML = `
                     <div>
                         <div class="relative overflow-hidden h-48 sm:h-56 bg-gray-900 cursor-pointer flex items-center justify-center p-2" onclick="openZoomModal(${product.id})">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500">
+                            <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500">
                             <span class="absolute top-2.5 right-2.5 bg-cyan-500/90 text-gray-900 text-[10px] sm:text-xs font-black px-2.5 py-0.5 rounded-full backdrop-blur-sm z-10">
                                 ${product.category === 'digital' ? '⚡ اشتراك رقمي' : '📦 منتج عادي'}
+                            </span>
+                            <span class="absolute top-2.5 left-2.5 bg-orange-500 text-white text-[10px] sm:text-xs font-black px-2.5 py-0.5 rounded-full z-10 animate-pulse">
+                                🔥 ${product.discount}
                             </span>
                         </div>
                         <div class="p-4 sm:p-5">
@@ -225,7 +251,10 @@
                         </div>
                     </div>
                     <div class="p-4 sm:p-5 pt-0 flex flex-col gap-3">
-                        <div class="text-lg sm:text-xl font-black text-cyan-400">${formatPrice(product.priceBHD)}</div>
+                        <div class="flex items-center gap-3">
+                            <div class="text-lg sm:text-xl font-black text-cyan-400">${formatPrice(product.priceBHD)}</div>
+                            <div class="text-xs sm:text-sm text-gray-400 line-through">${formatPrice(product.oldPriceBHD)}</div>
+                        </div>
                         <div class="flex gap-2">
                             <button onclick="addToCart(${product.id})" class="flex-1 bg-gray-800 hover:bg-gray-700 text-cyan-400 border border-cyan-500/30 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition">إضافة للسلة 🛒</button>
                             <button onclick="openCheckout(${product.id})" class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shadow-md shadow-cyan-600/20">اطلب الآن 🚀</button>
@@ -242,11 +271,29 @@
 
         function openZoomModal(productId) {
             const product = products.find(p => p.id === productId);
-            document.getElementById('zoom-modal-img').src = product.image;
+            document.getElementById('zoom-modal-img').src = product.images[0];
             document.getElementById('zoom-modal-title').innerText = product.name;
             document.getElementById('zoom-modal-desc').innerText = product.description;
             document.getElementById('zoom-modal-cat').innerText = product.category === 'digital' ? '⚡ اشتراك رقمي' : '📦 منتج عادي';
             document.getElementById('zoom-modal-price').innerText = formatPrice(product.priceBHD);
+            document.getElementById('zoom-modal-old-price').innerText = formatPrice(product.oldPriceBHD);
+            document.getElementById('zoom-modal-badge').innerText = product.discount;
+
+            const thumbsContainer = document.getElementById('zoom-thumbnails');
+            thumbsContainer.innerHTML = '';
+            if (product.images.length > 1) {
+                product.images.forEach((imgSrc, idx) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = imgSrc;
+                    thumb.className = `w-14 h-14 object-contain rounded-lg border-2 cursor-pointer bg-gray-900 p-1 transition ${idx === 0 ? 'border-cyan-400' : 'border-gray-700 hover:border-gray-500'}`;
+                    thumb.onclick = function() {
+                        document.getElementById('zoom-modal-img').src = imgSrc;
+                        Array.from(thumbsContainer.children).forEach(t => t.className = "w-14 h-14 object-contain rounded-lg border-2 cursor-pointer bg-gray-900 p-1 transition border-gray-700 hover:border-gray-500");
+                        thumb.className = "w-14 h-14 object-contain rounded-lg border-2 cursor-pointer bg-gray-900 p-1 transition border-cyan-400";
+                    };
+                    thumbsContainer.appendChild(thumb);
+                });
+            }
             
             document.getElementById('zoom-add-cart-btn').onclick = function() {
                 addToCart(product.id);
