@@ -1,14 +1,54 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar-BH" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BH SOUQ | سوق البحرين</title>
+    <title>bh SOUQ | متجر إلكتروني في البحرين</title>
+    <meta name="description" content="تسوق من bh SOUQ أفضل المنتجات والعروض مع توصيل داخل البحرين.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.bhsouq.com/">
+
+    <meta property="og:locale" content="ar_BH">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="bh SOUQ | متجر إلكتروني في البحرين">
+    <meta property="og:description" content="اكتشف منتجات وعروض bh SOUQ مع توصيل داخل البحرين.">
+    <meta property="og:url" content="https://www.bhsouq.com/">
+    <meta property="og:site_name" content="bh SOUQ">
+    <meta property="og:image" content="https://www.bhsouq.com/images/og-image.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="bh SOUQ | متجر إلكتروني في البحرين">
+    <meta name="twitter:description" content="تسوق أفضل المنتجات والعروض من bh SOUQ.">
+    <meta name="twitter:image" content="https://www.bhsouq.com/images/og-image.jpg">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Tajawal', sans-serif; background-color: #0b1329; color: #f3f4f6; }
     </style>
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "bh SOUQ",
+      "url": "https://www.bhsouq.com/"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "bh SOUQ",
+      "url": "https://www.bhsouq.com/",
+      "logo": "https://www.bhsouq.com/IMG_0637.PNG",
+      "sameAs": [
+        "https://www.instagram.com/_bhsouq_",
+        "https://www.tiktok.com/@bhsouq"
+      ]
+    }
+    </script>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
@@ -16,9 +56,9 @@
     <div id="currency-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
         <div class="bg-[#111c38] border border-cyan-500/30 p-6 sm:p-8 rounded-2xl shadow-2xl max-w-sm sm:max-w-md w-full text-center">
             <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 rounded-2xl overflow-hidden border-2 border-cyan-400 shadow-lg bg-gray-900/90 flex items-center justify-center p-2">
-                <img src="IMG_0637.PNG" alt="BH SOUQ Logo" class="w-full h-full object-contain">
+                <img src="IMG_0637.PNG" alt="شعار متجر bh SOUQ الإلكتروني في البحرين" width="112" height="112" class="w-full h-full object-contain" loading="lazy">
             </div>
-            <h2 class="text-xl sm:text-2xl font-bold text-cyan-400 mb-2">مرحباً بك في BH SOUQ</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-cyan-400 mb-2">مرحباً بك في bh SOUQ</h2>
             <p class="text-gray-300 mb-6 text-xs sm:text-sm">الرجاء اختيار العملة المفضلة لديك لعرض الأسعار:</p>
             <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-2">
                 <button onclick="setCurrency('BHD', 'د.ب')" class="p-2.5 sm:p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-xl font-bold transition text-xs sm:text-sm text-cyan-300 hover:text-white">دينار بحريني (BHD)</button>
@@ -34,11 +74,11 @@
         <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2 sm:gap-3">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden border border-cyan-400 bg-gray-900 flex items-center justify-center p-1 flex-shrink-0">
-                    <img src="IMG_0637.PNG" alt="Logo" class="w-full h-full object-contain">
+                    <img src="IMG_0637.PNG" alt="شعار bh SOUQ للتسوق في البحرين" width="48" height="48" class="w-full h-full object-contain" loading="eager">
                 </div>
                 <div>
-                    <h1 class="text-base sm:text-xl font-black text-cyan-400 tracking-wider">BH SOUQ</h1>
-                    <span class="text-[10px] sm:text-xs text-orange-400 font-semibold">سوق البحرين الرقمي</span>
+                    <span class="text-base sm:text-xl font-black text-cyan-400 tracking-wider">bh SOUQ</span>
+                    <span class="text-[10px] sm:text-xs text-orange-400 font-semibold block">سوق البحرين الرقمي</span>
                 </div>
             </div>
             <div class="flex items-center gap-2 sm:gap-4">
@@ -54,12 +94,19 @@
 
     <!-- المحتوى الرئيسي -->
     <main class="max-w-7xl mx-auto px-3 sm:px-4 py-6 flex-grow w-full">
+        <section class="mb-6 text-center">
+            <h1 class="text-2xl sm:text-3xl font-black text-white mb-2">bh SOUQ - متجرك الإلكتروني في البحرين</h1>
+            <p class="text-gray-300 text-xs sm:text-sm max-w-2xl mx-auto">مرحباً بك في متجر إلكتروني في البحرين bh SOUQ. تسوق في البحرين بكل سهولة واستفد من أقوى العروض والمنتجات الأصلية مع توصيل سريع وخيارات دفع آمنة داخل البحرين.</p>
+        </section>
+
         <!-- شريط الأقسام -->
         <div class="flex justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 overflow-x-auto py-1">
             <button onclick="filterProducts('all')" id="btn-all" class="px-4 sm:px-6 py-2 rounded-xl font-bold bg-cyan-600 text-white text-xs sm:text-sm shadow-lg transition whitespace-nowrap">جميع المنتجات</button>
             <button onclick="filterProducts('digital')" id="btn-digital" class="px-4 sm:px-6 py-2 rounded-xl font-bold bg-gray-800 text-gray-300 hover:bg-gray-700 text-xs sm:text-sm transition whitespace-nowrap">الاشتراكات الرقمية</button>
             <button onclick="filterProducts('physical')" id="btn-physical" class="px-4 sm:px-6 py-2 rounded-xl font-bold bg-gray-800 text-gray-300 hover:bg-gray-700 text-xs sm:text-sm transition whitespace-nowrap">المنتجات العادية</button>
         </div>
+
+        <h2 class="sr-only">قائمة منتجات وعروض المتجر</h2>
 
         <!-- شبكة المنتجات -->
         <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -73,7 +120,7 @@
             <button onclick="closeZoomModal()" class="absolute top-3 left-3 text-gray-400 hover:text-white bg-gray-800/80 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-lg z-10 transition">✕</button>
             <div class="w-full md:w-1/2 flex flex-col gap-3">
                 <div class="h-56 sm:h-72 bg-gray-900 rounded-xl overflow-hidden flex items-center justify-center border border-gray-800 p-2">
-                    <img id="zoom-modal-img" src="" alt="Zoomed Product" class="w-full h-full object-contain">
+                    <img id="zoom-modal-img" src="" alt="استعراض صورة المنتج" width="300" height="300" class="w-full h-full object-contain" loading="lazy">
                 </div>
                 <div id="zoom-thumbnails" class="flex gap-2 justify-center overflow-x-auto py-1"></div>
             </div>
@@ -144,7 +191,7 @@
     <footer class="bg-[#111c38] border-t border-gray-800 py-6 text-center text-gray-400 text-xs sm:text-sm mt-auto">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="text-cyan-400 font-bold">
-                BH SOUQ © 2026 - جميع حقوق الطبع والنشر محفوظة
+                bh SOUQ © 2026 - جميع حقوق الطبع والنشر محفوظة
             </div>
             <div class="flex flex-wrap items-center justify-center gap-3">
                 <a href="https://www.instagram.com/_bhsouq_?stkn=MWdpcm95bTU3aXRzbQ%3D%3D&utm_source=qr" target="_blank" class="flex items-center gap-2 text-white bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-500 hover:opacity-90 transition font-semibold px-3.5 py-2 rounded-xl shadow-md text-xs sm:text-sm">
@@ -236,7 +283,7 @@
 
         function formatPrice(priceInBHD) {
             const converted = priceInBHD * exchangeRates[currentCurrency].rate;
-            return `${converted.toFixed(3)} ${currentSymbol}`;
+            return `${converted.toFixed(3)}${currentSymbol}`;
         }
 
         function renderProducts(filter = 'all') {
@@ -276,7 +323,7 @@
                 card.innerHTML = `
                     <div>
                         <div class="relative overflow-hidden h-48 sm:h-56 bg-gray-900 cursor-pointer flex items-center justify-center p-2" onclick="openZoomModal(${product.id})">
-                            <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500">
+                            <img src="${product.images[0]}" alt="${product.name}" width="300" height="224" class="w-full h-full object-contain group-hover:scale-105 transition duration-500" loading="lazy">
                             <span class="absolute top-2.5 right-2.5 bg-cyan-500/90 text-gray-900 text-[10px] sm:text-xs font-black px-2.5 py-0.5 rounded-full backdrop-blur-sm z-10">
                                 ${product.category === 'digital' ? '⚡ اشتراك رقمي' : '📦 منتج عادي'}
                             </span>
@@ -284,8 +331,7 @@
                         </div>
                         <div class="p-4 sm:p-5">
                             <h3 class="text-base sm:text-lg font-bold text-white mb-2 cursor-pointer hover:text-cyan-400 transition" onclick="openZoomModal(${product.id})">${product.name}</h3>
-                            <p class="text-gray-300 text-xs sm:text-sm mb-2 leading-relaxed">${formattedDesc}</p>
-                            ${stockBadge}
+                            <p class="text-gray-300 text-xs sm:text-sm mb-2 leading-relaxed">${formattedDesc}</p>${stockBadge}
                         </div>
                     </div>
                     <div class="p-4 sm:p-5 pt-0 flex flex-col gap-3">
@@ -375,6 +421,9 @@
                 product.images.forEach((imgSrc, idx) => {
                     const thumb = document.createElement('img');
                     thumb.src = imgSrc;
+                    thumb.alt = "صورة مصغرة للمنتج";
+                    thumb.width = 56;
+                    thumb.height = 56;
                     thumb.className = `w-14 h-14 object-contain rounded-lg border-2 cursor-pointer bg-gray-900 p-1 transition ${idx === 0 ? 'border-cyan-400' : 'border-gray-700 hover:border-gray-500'}`;
                     thumb.onclick = function() {
                         document.getElementById('zoom-modal-img').src = imgSrc;
@@ -520,7 +569,7 @@
             if (hasPhysical) {
                 const region = document.getElementById('cust-region').value.trim();
                 const addressDetails = document.getElementById('cust-address').value.trim();
-                addressText = `${region} - ${addressDetails}`;
+                addressText = `${region} -${addressDetails}`;
             }
 
             const itemsToOrder = isCartCheckout ? cart : [activeCheckoutItem];
@@ -532,6 +581,7 @@
             whatsappMessage += `العنوان: ${addressText}`;
 
             if(isCartCheckout) {
+                cart = ``;
                 cart = [];
                 updateCartCount();
             }
