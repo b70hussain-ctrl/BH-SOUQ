@@ -24,10 +24,22 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; background: linear-gradient(135deg, #070b19 0%, #0b1329 100%); color: #f3f4f6; }
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background: linear-gradient(135deg, #070b19 0%, #0b1329 100%); 
+            color: #f3f4f6; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        /* منع تشويش الصور وحفظ دقتها الأصلية وحيويتها */
+        img {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
         @keyframes pulseGlow {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.03); opacity: 0.9; }
+            50% { transform: scale(1.02); opacity: 0.95; }
         }
         .trust-badge-anim { animation: pulseGlow 3s infinite ease-in-out; }
     </style>
@@ -64,19 +76,19 @@
                 <img src="IMG_0637.PNG" alt="شعار متجر bh SOUQ الإلكتروني في البحرين" width="112" height="112" class="w-full h-full object-contain" loading="lazy">
             </div>
             <h2 class="text-xl sm:text-2xl font-black text-cyan-400 mb-2">مرحباً بك في bh SOUQ</h2>
-            <p class="text-gray-300 mb-6 text-xs sm:text-sm">الرجاء اختيار العملة المفضلة لديك لعرض الأسعار:</p>
+            <p class="text-gray-200 mb-6 text-xs sm:text-sm font-medium">الرجاء اختيار العملة المفضلة لديك لعرض الأسعار بدقة:</p>
             <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-2">
-                <button onclick="setCurrency('BHD', 'د.ب')" class="p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-2xl font-bold transition text-xs sm:text-sm text-cyan-300 hover:text-white shadow-md">دينار بحريني (BHD)</button>
-                <button onclick="setCurrency('SAR', 'ر.س')" class="p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-2xl font-bold transition text-xs sm:text-sm text-cyan-300 hover:text-white shadow-md">ريال سعودي (SAR)</button>
-                <button onclick="setCurrency('AED', 'د.إ')" class="p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-2xl font-bold transition text-xs sm:text-sm text-cyan-300 hover:text-white shadow-md">درهم إماراتي (AED)</button>
-                <button onclick="setCurrency('USD', '$')" class="p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-2xl font-bold transition text-xs sm:text-sm text-cyan-300 hover:text-white shadow-md">دولار أمريكي (USD)</button>
+                <button onclick="setCurrency('BHD', 'د.ب')" class="p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-2xl font-bold transition text-xs sm:text-sm text-cyan-200 hover:text-white shadow-md">دينار بحريني (BHD)</button>
+                <button onclick="setCurrency('SAR', 'ر.س')" class="p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-2xl font-bold transition text-xs sm:text-sm text-cyan-200 hover:text-white shadow-md">ريال سعودي (SAR)</button>
+                <button onclick="setCurrency('AED', 'د.إ')" class="p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-2xl font-bold transition text-xs sm:text-sm text-cyan-200 hover:text-white shadow-md">درهم إماراتي (AED)</button>
+                <button onclick="setCurrency('USD', '$')" class="p-3 bg-cyan-600/20 hover:bg-cyan-600 border border-cyan-500/50 rounded-2xl font-bold transition text-xs sm:text-sm text-cyan-200 hover:text-white shadow-md">دولار أمريكي (USD)</button>
             </div>
             <button id="close-currency-btn" onclick="closeCurrencyModal()" class="mt-4 text-xs text-gray-400 hover:text-white underline hidden">إغلاق</button>
         </div>
     </div>
 
     <!-- الهيدر الرئيسي الفخم -->
-    <header class="bg-[#0b1329]/95 backdrop-blur-xl border-b border-cyan-500/20 sticky top-0 z-40 shadow-lg">
+    <header class="bg-[#0b1329]/95 backdrop-blur-xl border-b border-cyan-500/20 sticky top-0 z-40 shadow-xl">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3.5 flex justify-between items-center">
             <div class="flex items-center gap-2.5 sm:gap-3.5">
                 <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden border-2 border-cyan-400/80 bg-gray-900 flex items-center justify-center p-1 flex-shrink-0 shadow-md">
@@ -88,9 +100,8 @@
                 </div>
             </div>
             <div class="flex items-center gap-2 sm:gap-3.5">
-                <!-- زر العملة القابل للضغط في أي وقت لتغييرها -->
-                <button onclick="openCurrencyModal()" class="text-xs sm:text-sm bg-cyan-950/80 hover:bg-cyan-900 px-3 py-2 rounded-2xl border border-cyan-500/40 text-cyan-300 font-black transition flex items-center gap-1.5 shadow-md">
-                    🌐 <span id="current-currency-label">BHD</span> 🔄
+                <button onclick="openCurrencyModal()" class="text-xs sm:text-sm bg-cyan-950/80 hover:bg-cyan-900 px-3.5 py-2 rounded-2xl border border-cyan-500/40 text-cyan-200 font-bold transition flex items-center gap-1.5 shadow-md">
+                    🌐 <span id="current-currency-label" class="font-black">BHD</span> 🔄
                 </button>
                 <button onclick="openCartModal()" class="relative bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-3.5 sm:px-4 py-2 rounded-2xl font-bold text-xs sm:text-sm flex items-center gap-1.5 transition shadow-lg shadow-cyan-500/20">
                     🛒 السلة <span id="cart-count" class="bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-black">0</span>
@@ -103,37 +114,37 @@
     <main class="max-w-7xl mx-auto px-3 sm:px-6 py-6 flex-grow w-full">
         <section class="mb-6 text-center">
             <h1 class="text-xl sm:text-3xl font-black text-white mb-2 tracking-wide">bh SOUQ - متجرك الإلكتروني الموثوق في البحرين</h1>
-            <p class="text-gray-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">مرحباً بك في الوجهة الأولى للارتقاء بتجربتك الرقمية في البحرين. نوفر اشتراكات أصلية ومضمونة 100% مع دعم فني متواصل وسرعة فائقة في التنفيذ.</p>
+            <p class="text-gray-200 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-medium">مرحباً بك في الوجهة الأولى للارتقاء بتجربتك الرقمية في البحرين. نوفر اشتراكات أصلية ومضمونة 100% مع دعم فني متواصل وسرعة فائقة في التنفيذ.</p>
         </section>
 
         <!-- شريط الأقسام -->
         <div class="flex justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 overflow-x-auto py-1">
             <button onclick="filterProducts('all')" id="btn-all" class="px-4 sm:px-6 py-2.5 rounded-2xl font-bold bg-cyan-600 text-white text-xs sm:text-sm shadow-lg shadow-cyan-600/30 transition whitespace-nowrap">جميع المنتجات</button>
-            <button onclick="filterProducts('digital')" id="btn-digital" class="px-4 sm:px-6 py-2.5 rounded-2xl font-bold bg-gray-900/80 text-gray-300 hover:bg-gray-800 text-xs sm:text-sm border border-gray-800 transition whitespace-nowrap">الاشتراكات الرقمية</button>
-            <button onclick="filterProducts('physical')" id="btn-physical" class="px-4 sm:px-6 py-2.5 rounded-2xl font-bold bg-gray-900/80 text-gray-300 hover:bg-gray-800 text-xs sm:text-sm border border-gray-800 transition whitespace-nowrap">المنتجات العادية</button>
+            <button onclick="filterProducts('digital')" id="btn-digital" class="px-4 sm:px-6 py-2.5 rounded-2xl font-bold bg-gray-900/80 text-gray-200 hover:bg-gray-800 text-xs sm:text-sm border border-gray-800 transition whitespace-nowrap">الاشتراكات الرقمية</button>
+            <button onclick="filterProducts('physical')" id="btn-physical" class="px-4 sm:px-6 py-2.5 rounded-2xl font-bold bg-gray-900/80 text-gray-200 hover:bg-gray-800 text-xs sm:text-sm border border-gray-800 transition whitespace-nowrap">المنتجات العادية</button>
         </div>
 
         <!-- شريط الأمان والثقة المتحرك (Trust Badges) -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
-            <div class="bg-[#111c38]/90 border border-cyan-500/30 rounded-2xl p-3.5 text-center shadow-lg trust-badge-anim flex items-center justify-center gap-3">
+            <div class="bg-[#111c38]/95 border border-cyan-500/30 rounded-2xl p-3.5 text-center shadow-lg trust-badge-anim flex items-center justify-center gap-3">
                 <span class="text-2xl">🛡️</span>
                 <div class="text-right">
-                    <h4 class="text-cyan-400 font-black text-xs sm:text-sm">+3 سنوات</h4>
-                    <p class="text-gray-300 text-[11px]">خبرة في البيع الرقمي المضمون</p>
+                    <h4 class="text-cyan-300 font-black text-xs sm:text-sm">+3 سنوات</h4>
+                    <p class="text-gray-200 text-[11px] font-medium">خبرة في البيع الرقمي المضمون</p>
                 </div>
             </div>
-            <div class="bg-[#111c38]/90 border border-cyan-500/30 rounded-2xl p-3.5 text-center shadow-lg trust-badge-anim flex items-center justify-center gap-3" style="animation-delay: 1s;">
+            <div class="bg-[#111c38]/95 border border-cyan-500/30 rounded-2xl p-3.5 text-center shadow-lg trust-badge-anim flex items-center justify-center gap-3" style="animation-delay: 1s;">
                 <span class="text-2xl">⏳</span>
                 <div class="text-right">
-                    <h4 class="text-cyan-400 font-black text-xs sm:text-sm" id="store-age-text">تأسس في سبتمبر 2026</h4>
-                    <p class="text-gray-300 text-[11px]" id="store-months-text">مر أكثر من شهر على إطلاق المتجر</p>
+                    <h4 class="text-cyan-300 font-black text-xs sm:text-sm" id="store-age-text">تأسس في سبتمبر 2026</h4>
+                    <p class="text-gray-200 text-[11px] font-medium" id="store-months-text">مر أكثر من شهر على إطلاق المتجر</p>
                 </div>
             </div>
-            <div class="bg-[#111c38]/90 border border-cyan-500/30 rounded-2xl p-3.5 text-center shadow-lg trust-badge-anim flex items-center justify-center gap-3" style="animation-delay: 2s;">
+            <div class="bg-[#111c38]/95 border border-cyan-500/30 rounded-2xl p-3.5 text-center shadow-lg trust-badge-anim flex items-center justify-center gap-3" style="animation-delay: 2s;">
                 <span class="text-2xl">⭐</span>
                 <div class="text-right">
-                    <h4 class="text-cyan-400 font-black text-xs sm:text-sm">+10 عمليات بيع ناجحة</h4>
-                    <p class="text-gray-300 text-[11px]">بثقة وسعادة عملائنا الكرام</p>
+                    <h4 class="text-cyan-300 font-black text-xs sm:text-sm">+10 عمليات بيع ناجحة</h4>
+                    <p class="text-gray-200 text-[11px] font-medium">بثقة وسعادة عملائنا الكرام</p>
                 </div>
             </div>
         </div>
@@ -149,27 +160,27 @@
     <!-- نافذة تكبير واستعراض المنتج -->
     <div id="product-zoom-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/95 backdrop-blur-md p-3 sm:p-4">
         <div class="relative max-w-3xl w-full bg-[#111c38] border border-cyan-500/40 rounded-3xl overflow-hidden shadow-2xl p-4 sm:p-6 flex flex-col md:flex-row gap-4 sm:gap-6 max-h-[90vh] overflow-y-auto">
-            <button onclick="closeZoomModal()" class="absolute top-3 left-3 text-gray-400 hover:text-white bg-gray-800/80 w-9 h-9 rounded-full flex items-center justify-center font-bold text-base z-10 transition">✕</button>
+            <button onclick="closeZoomModal()" class="absolute top-3 left-3 text-gray-300 hover:text-white bg-gray-800/80 w-9 h-9 rounded-full flex items-center justify-center font-bold text-base z-10 transition">✕</button>
             <div class="w-full md:w-1/2 flex flex-col gap-3">
-                <div class="h-56 sm:h-72 bg-gray-900 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-800 p-2">
-                    <img id="zoom-modal-img" src="" alt="استعراض صورة المنتج" width="300" height="300" class="w-full h-full object-contain" loading="lazy">
+                <div class="h-64 sm:h-80 bg-gray-950 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-800 p-2 shadow-inner">
+                    <img id="zoom-modal-img" src="" alt="استعراض صورة المنتج بجودة عالية" width="600" height="600" class="w-full h-full object-contain" loading="lazy">
                 </div>
                 <div id="zoom-thumbnails" class="flex gap-2 justify-center overflow-x-auto py-1"></div>
             </div>
             <div class="w-full md:w-1/2 flex flex-col justify-between">
                 <div>
-                    <span id="zoom-modal-cat" class="text-[10px] sm:text-xs font-black bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full inline-block mb-2"></span>
+                    <span id="zoom-modal-cat" class="text-[10px] sm:text-xs font-black bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full inline-block mb-2"></span>
                     <h3 id="zoom-modal-title" class="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3"></h3>
-                    <p id="zoom-modal-desc" class="text-gray-300 text-xs sm:text-sm mb-4 leading-relaxed whitespace-pre-line"></p>
+                    <p id="zoom-modal-desc" class="text-gray-100 text-xs sm:text-sm mb-4 leading-relaxed whitespace-pre-line font-medium"></p>
                 </div>
                 <div>
                     <div class="flex items-center gap-3 mb-4">
-                        <div id="zoom-modal-price" class="text-xl sm:text-2xl font-black text-cyan-400"></div>
+                        <div id="zoom-modal-price" class="text-xl sm:text-2xl font-black text-cyan-300"></div>
                         <div id="zoom-modal-old-price" class="text-sm text-gray-400 line-through"></div>
                         <div id="zoom-modal-badge" class="bg-orange-500 text-white text-xs font-black px-2.5 py-1 rounded-xl"></div>
                     </div>
                     <div class="flex gap-2.5 sm:gap-3">
-                        <button id="zoom-add-cart-btn" class="flex-1 bg-gray-800 hover:bg-gray-700 text-cyan-400 border border-cyan-500/30 py-3 rounded-2xl font-bold text-xs sm:text-sm transition">إضافة للسلة 🛒</button>
+                        <button id="zoom-add-cart-btn" class="flex-1 bg-gray-800 hover:bg-gray-700 text-cyan-300 border border-cyan-500/30 py-3 rounded-2xl font-bold text-xs sm:text-sm transition">إضافة للسلة 🛒</button>
                         <button id="zoom-buy-btn" class="flex-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-3 rounded-2xl font-bold text-xs sm:text-sm transition shadow-lg shadow-cyan-600/30">اطلب الآن 🚀</button>
                     </div>
                 </div>
@@ -180,8 +191,8 @@
     <!-- نافذة اختيار المدة للاشتراكات ذات الخيارات المتعددة -->
     <div id="options-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4">
         <div class="bg-[#111c38] border border-cyan-500/40 p-6 rounded-3xl shadow-2xl max-w-md w-full text-center">
-            <h3 id="options-product-title" class="text-lg font-bold text-cyan-400 mb-2">اختر مدة الاشتراك</h3>
-            <p class="text-gray-300 text-xs mb-5">يرجى تحديد الفترة المطلوبة:</p>
+            <h3 id="options-product-title" class="text-lg font-bold text-cyan-300 mb-2">اختر مدة الاشتراك</h3>
+            <p class="text-gray-200 text-xs mb-5 font-medium">يرجى تحديد الفترة المطلوبة:</p>
             <div id="options-list" class="space-y-3 mb-5">
                 <!-- الخيارات ستولد هنا ديناميكياً مع الأسعار -->
             </div>
@@ -192,7 +203,7 @@
     <!-- نافذة إتمام الطلب (Checkout Modal) -->
     <div id="checkout-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4">
         <div class="bg-[#111c38] border border-cyan-500/40 p-6 rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
-            <h3 class="text-lg sm:text-xl font-bold text-cyan-400 mb-4 border-b border-gray-800 pb-3">إتمام الطلب</h3>
+            <h3 class="text-lg sm:text-xl font-bold text-cyan-300 mb-4 border-b border-gray-800 pb-3">إتمام الطلب</h3>
             <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-3.5">
                 <div id="dynamic-fields" class="space-y-3.5"></div>
                 <div class="flex gap-3 pt-3">
@@ -203,17 +214,17 @@
         </div>
     </div>
 
-    <!-- نافذة السلة التفاعلية (مع أزرار الكميات + و -) -->
+    <!-- نافذة السلة التفاعلية -->
     <div id="cart-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4">
         <div class="bg-[#111c38] border border-cyan-500/40 p-6 rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
-            <h3 class="text-lg sm:text-xl font-bold text-cyan-400 mb-4 border-b border-gray-800 pb-3 flex justify-between items-center">
+            <h3 class="text-lg sm:text-xl font-bold text-cyan-300 mb-4 border-b border-gray-800 pb-3 flex justify-between items-center">
                 <span>سلة المشتريات 🛒</span>
-                <button onclick="closeCartModal()" class="text-gray-400 hover:text-white text-sm">✕</button>
+                <button onclick="closeCartModal()" class="text-gray-300 hover:text-white text-sm">✕</button>
             </h3>
             <div id="cart-items-list" class="space-y-3 mb-5 max-h-64 overflow-y-auto pr-1"></div>
             <div class="flex justify-between items-center font-black text-lg mb-6 border-t border-gray-800 pt-4">
                 <span>المجموع الكلي:</span>
-                <span id="cart-total-price" class="text-cyan-400">0.000</span>
+                <span id="cart-total-price" class="text-cyan-300">0.000</span>
             </div>
             <div class="flex gap-3">
                 <button onclick="checkoutCart()" class="flex-1 bg-green-600 hover:bg-green-500 text-white py-3 rounded-2xl font-bold text-xs sm:text-sm transition shadow-lg shadow-green-600/30">تأكيد طلبات السلة عبر الواتساب 📱</button>
@@ -223,9 +234,9 @@
     </div>
 
     <!-- الفوتر مع أيقونات التواصل الاجتماعي -->
-    <footer class="bg-[#0b1329] border-t border-cyan-500/20 py-6 text-center text-gray-400 text-xs sm:text-sm mt-auto">
+    <footer class="bg-[#0b1329] border-t border-cyan-500/20 py-6 text-center text-gray-300 text-xs sm:text-sm mt-auto">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-cyan-400 font-bold">
+            <div class="text-cyan-300 font-bold">
                 bh SOUQ © 2026 - جميع حقوق الطبع والنشر محفوظة 🇧🇭
             </div>
             <div class="flex flex-wrap items-center justify-center gap-3">
@@ -257,14 +268,14 @@
         let currentCurrency = 'BHD';
         let currentSymbol = 'د.ب';
 
-        // حساب عمر المتجر تلقائياً منذ سبتمبر 2026
+        // حساب عمر المتجر تلقائياً منذ سبتمبر 2026 بدقة واضحة عالية الوضوح
         function updateStoreAge() {
             const launchDate = new Date(2026, 8, 1); // 1 سبتمبر 2026
             const currentDate = new Date();
             let months = (currentDate.getFullYear() - launchDate.getFullYear()) * 12 + (currentDate.getMonth() - launchDate.getMonth());
             if (months < 1) months = 1;
             document.getElementById('store-age-text').innerText = `تأسس في سبتمبر 2026`;
-            document.getElementById('store-months-text').innerText = `مر أكثر من ${months} ${months === 1 ? 'شهر' : 'شهور'} على الإطلاق`;
+            document.getElementById('store-months-text').innerText = `مر أكثر من ${months}${months === 1 ? 'شهر' : 'شهور'} على الإطلاق`;
         }
 
         const products = [
@@ -277,7 +288,7 @@
                 discount: "خصم 55%",
                 stockText: "🔥 متبقي 3 حبات فقط!",
                 images: ["IMG_0682.png"],
-                description: "👑 اشتراك خاص وعلى حسابك الشخصي وآمن ١٠٠٪؜\n🚀 أداء فائق السرعة والتميز!\n📊 تحليل بيانات متقدم ودقيق للغاية.\n🪄 توليد محتوى إبداعي وابتكاري بلا حدود.\n🌐 دعم لغات متعددة واحترافية عالية.\n✨ تفعيل فوري ومباشر على حسابك الخاص!"
+                description: "👑 اشتراك خاص وعلى حسابك الشخصي وآمن ١٠٠٪؜\n\n🚀 أداء فائق السرعة والتميز لتعزيز إنتاجيتك بالذكاء الاصطناعي!\n\n📊 تحليل بيانات متقدم ودقيق للغاية لمختلف المشاريع.\n\n🪄 توليد محتوى إبداعي وابتكاري بلا حدود.\n\n🌐 دعم لغات متعددة واحترافية عالية في الترجمة والبرمجة.\n\n✨ تفعيل فوري ومباشر على حسابك الشخصي مع ضمان كامل المدة!"
             },
             {
                 id: 2,
@@ -287,7 +298,7 @@
                 oldPriceBHD: 6.900,
                 discount: "خصم 55%",
                 images: ["IMG_0680.png"],
-                description: "🎨 احصل الآن على اشتراك Canva Pro مدى الحياة واستمتع بأدوات تصميم احترافية بأسعار مميزة! 🚀\n\n✨ مميزات الاشتراك:\n✅ ملايين القوالب والصور والعناصر الاحترافية\n✅ إزالة خلفية الصور بضغطة واحدة 🖼️\n✅ تغيير مقاس التصميم تلقائيًا لجميع المنصات 📱\n✅ استخدام الخطوط والعناصر والصور المميزة ⭐\n✅ أدوات متقدمة لتحرير الصور والفيديو 🎬\n✅ تصميم منشورات وإعلانات ومشاريعك بسهولة 💡\n✅ تصاميمك الخاصة لا تظهر للمستخدمين الآخرين 🔒\n✅ ضمان لمدة سنتين من تاريخ الشراء 🛡️\n\n📩 طريقة التفعيل:\nتصلك دعوة على بريدك الإلكتروني، فقط قم بقبولها وسيتم ترقية اشتراكك مباشرةً ⚡"
+                description: "🎨 احصل الآن على اشتراك Canva Pro مدى الحياة واستمتع بأدوات تصميم احترافية بأسعار مميزة! 🚀\n\n✨ مميزات الاشتراك الأساسية:\n✅ ملايين القوالب والصور والرسومات والعناصر الاحترافية الحصرية\n✅ إزالة خلفية الصور بضغطة زر واحدة بكل دقة 🖼️\n✅ تغيير مقاس التصميم تلقائيًا لجميع منصات التواصل الاجتماعي 📱\n✅ استخدام كافة الخطوط والعناصر والصور المميزة والمدفوعة ⭐\n✅ أدوات متقدمة واحترافية لتحرير الصور والفيديو 🎬\n✅ تصميم منشورات، إعلانات، وعروض تقديمية بسهولة تامة 💡\n✅ تصاميمك الخاصة سرية تماماً ولا تظهر للمستخدمين الآخرين 🔒\n✅ ضمان رسمي لمدة سنتين كاملة من تاريخ الشراء 🛡️\n\n📩 طريقة التفعيل السريعة:\nتصلك دعوة رسمية على بريدك الإلكتروني، فقط قم بقبولها وسيتم ترقية حسابك الشخصي مباشرةً ⚡"
             },
             {
                 id: 3,
@@ -300,7 +311,7 @@
                     { name: "ستة شهور (6 Months)", priceBHD: 5.990 }
                 ],
                 images: ["IMG_0681.png"],
-                description: "استمتع بتجربة مشاهدة مميزة مع Max Pro 📺🔥\n\nمكتبة ضخمة من القنوات المباشرة، وقنوات beIN SPORTS وثمانية، مع جودة عالية وبدون تقطيع لمتابعة جميع مبارياتك المفضلة ⚽🏆\n\nكما نوفر لك مكتبة واسعة من أحدث المسلسلات والأفلام، مع إمكانية التشغيل على جميع الأجهزة: التلفزيون، الجوال، التابلت والكمبيوتر 📱💻\n\n✅ ضمان كامل المدة\n✅ جودة مشاهدة عالية\n✅ قنوات مباشرة متنوعة\n✅ مسلسلات وأفلام\n✅ يعمل على جميع الأجهزة\n\nالأسعار:\n🔹 شهر واحد: 1.990 دينار بحريني\n🔹 3 أشهر: 3.990 دينار بحريني\n🔹 6 أشهر: 5.990 دينار بحريني\n🔹 خيارات مدة أطول متاحة"
+                description: "استمتع بتجربة مشاهدة مذهلة ومميزة مع Max Pro 📺🔥\n\nمكتبة عملاقة وضخمة من القنوات المباشرة، وقنوات beIN SPORTS الرياضية وقنوات ثمانية، مع بث بجودة عالية وثابتة بدون تقطيع لمتابعة جميع مبارياتك ودورياتك المفضلة ⚽🏆\n\nكما نوفر لك مكتبة واسعة ومتجددة باستمرار من أحدث المسلسلات والأفلام العالمية والعربية، مع إمكانية التشغيل السلس على جميع أجهزة منزلك: التلفزيون الذكي، الجوال، التابلت، والكمبيوتر 📱💻\n\n✅ ضمان كامل المدة وخدمة عملاء متواصلة\n✅ جودة مشاهدة عالية الوضوح (HD / 4K)\n✅ قنوات مباشرة متنوعة ومحدثة باستمرار\n✅ مكتبة ضخمة من المسلسلات والأفلام الحصرية\n✅ يعمل بسلاسة على جميع الأجهزة الذكية"
             },
             {
                 id: 4,
@@ -310,7 +321,7 @@
                 oldPriceBHD: 15.900,
                 discount: "خصم 11%",
                 images: ["IMG_0674.JPEG", "IMG_0675.PNG", "IMG_0676.PNG"],
-                description: "🖱️ ماوس الألعاب الاحترافي الخارق ATTACK SHARK X11!\n🪶 وزن خارق الخفة 49 جرام فقط لسرعة حركة فائقة.\n🎯 مزود بمستشعر دقيق وعالي الأداء PAW3311.\n🔋 بطارية عملاقة تدوم حتى 130 ساعة من اللعب.\n⚡ اتصال ثلاثي الأوضاع (2.4G لاسلكي، بلوتوث 5.2، وسلكي Type-C).\n💡 يأتي مع قاعدة شحن RGB أنيقة ومميزة!"
+                description: "🖱️ ماوس الألعاب الاحترافي الخارق ATTACK SHARK X11 لعشاق الجيمننج والسرعة!\n\n🪶 وزن خارق وخفيف للغاية 49 جرام فقط لضمان سرعة حركة فائقة ودقة استجابة مذهلة.\n\n🎯 مزود بمستشعر بصري دقيق وعالي الأداء PAW3311.\n\n🔋 بطارية عملاقة ومدمجة تدوم حتى 130 ساعة متواصلة من اللعب والاستخدام الشاق.\n\n⚡ اتصال ثلاثي الأوضاع مرن (2.4G لاسلكي سريع، بلوتوث 5.2، وسلكي عبر منفذ Type-C).\n\n💡 يأتي مع قاعدة شحن أنيقة ومميزة مزودة بإضاءة RGB جذابة!"
             }
         ];
 
@@ -318,7 +329,6 @@
         let activeCheckoutItem = null;
         let isCartCheckout = false;
 
-        // إدارة نافذة تغيير العملة
         function openCurrencyModal() {
             document.getElementById('currency-modal').style.display = 'flex';
             document.getElementById('close-currency-btn').style.display = 'inline-block';
@@ -338,7 +348,7 @@
 
         function formatPrice(priceInBHD) {
             const converted = priceInBHD * exchangeRates[currentCurrency].rate;
-            return `${converted.toFixed(3)} ${currentSymbol}`;
+            return `${converted.toFixed(3)}${currentSymbol}`;
         }
 
         function renderProducts(filter = 'all') {
@@ -350,7 +360,7 @@
                 if(cat === filter) {
                     btn.className = "px-4 sm:px-6 py-2.5 rounded-2xl font-bold bg-cyan-600 text-white text-xs sm:text-sm shadow-lg shadow-cyan-600/30 transition whitespace-nowrap";
                 } else {
-                    btn.className = "px-4 sm:px-6 py-2.5 rounded-2xl font-bold bg-gray-900/80 text-gray-300 hover:bg-gray-800 text-xs sm:text-sm border border-gray-800 transition whitespace-nowrap";
+                    btn.className = "px-4 sm:px-6 py-2.5 rounded-2xl font-bold bg-gray-900/80 text-gray-200 hover:bg-gray-800 text-xs sm:text-sm border border-gray-800 transition whitespace-nowrap";
                 }
             });
 
@@ -365,11 +375,11 @@
 
                 let priceSection = '';
                 if (product.hasOptions) {
-                    priceSection = `<div class="text-sm sm:text-base font-black text-cyan-400">اختر المدة لمعرفة السعر ⚙️</div>`;
+                    priceSection = `<div class="text-sm sm:text-base font-black text-cyan-300">اختر المدة لمعرفة السعر ⚙️</div>`;
                 } else {
                     priceSection = `
                         <div class="flex items-center gap-3">
-                            <div class="text-lg sm:text-xl font-black text-cyan-400">${formatPrice(product.priceBHD)}</div>
+                            <div class="text-lg sm:text-xl font-black text-cyan-300">${formatPrice(product.priceBHD)}</div>
                             <div class="text-xs sm:text-sm text-gray-400 line-through">${formatPrice(product.oldPriceBHD)}</div>
                         </div>
                     `;
@@ -377,23 +387,22 @@
 
                 card.innerHTML = `
                     <div>
-                        <div class="relative overflow-hidden h-52 sm:h-60 bg-gray-950 cursor-pointer flex items-center justify-center p-3" onclick="openZoomModal(${product.id})">
-                            <img src="${product.images[0]}" alt="${product.name}" width="300" height="240" class="w-full h-full object-contain group-hover:scale-105 transition duration-500" loading="lazy">
+                        <div class="relative overflow-hidden h-56 sm:h-64 bg-gray-950 cursor-pointer flex items-center justify-center p-3" onclick="openZoomModal(${product.id})">
+                            <img src="${product.images[0]}" alt="${product.name} بجودة عالية" width="600" height="480" class="w-full h-full object-contain group-hover:scale-105 transition duration-500" loading="lazy">
                             <span class="absolute top-3 right-3 bg-cyan-500/90 text-gray-950 text-[10px] sm:text-xs font-black px-3 py-1 rounded-full backdrop-blur-md shadow-md">
                                 ${product.category === 'digital' ? '⚡ اشتراك رقمي' : '📦 منتج عادي'}
                             </span>
                             ${product.discount ? `<span class="absolute top-3 left-3 bg-orange-500 text-white text-[10px] sm:text-xs font-black px-3 py-1 rounded-full shadow-md animate-pulse">🔥 ${product.discount}</span>` : ''}
                         </div>
                         <div class="p-4 sm:p-5">
-                            <h3 class="text-base sm:text-lg font-bold text-white mb-2 cursor-pointer hover:text-cyan-400 transition" onclick="openZoomModal(${product.id})">${product.name}</h3>
-                            <p class="text-gray-300 text-xs sm:text-sm mb-3 leading-relaxed">${formattedDesc}</p>
-                            ${stockBadge}
+                            <h3 class="text-base sm:text-lg font-bold text-white mb-2 cursor-pointer hover:text-cyan-300 transition" onclick="openZoomModal(${product.id})">${product.name}</h3>
+                            <p class="text-gray-200 text-xs sm:text-sm mb-3 leading-relaxed font-medium">${formattedDesc}</p>${stockBadge}
                         </div>
                     </div>
                     <div class="p-4 sm:p-5 pt-0 flex flex-col gap-3">
                         ${priceSection}
                         <div class="flex gap-2.5">
-                            <button onclick="handleProductAction(${product.id}, 'cart')" class="flex-1 bg-gray-900 hover:bg-gray-800 text-cyan-400 border border-cyan-500/30 py-2.5 rounded-2xl font-bold text-xs sm:text-sm transition shadow-md">إضافة للسلة 🛒</button>
+                            <button onclick="handleProductAction(${product.id}, 'cart')" class="flex-1 bg-gray-900 hover:bg-gray-800 text-cyan-300 border border-cyan-500/30 py-2.5 rounded-2xl font-bold text-xs sm:text-sm transition shadow-md">إضافة للسلة 🛒</button>
                             <button onclick="handleProductAction(${product.id}, 'buy')" class="flex-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white py-2.5 rounded-2xl font-bold text-xs sm:text-sm transition shadow-lg shadow-cyan-600/20">اطلب الآن 🚀</button>
                         </div>
                     </div>
@@ -422,7 +431,6 @@
             }
 
             if (actionType === 'cart') {
-                // التحقق إذا كان المنتج موجود مسبقاً في السلة لزيادة الكمية
                 const existingIndex = cart.findIndex(item => item.id === product.id && item.optionKey === itemToAdd.optionKey);
                 if (existingIndex > -1) {
                     cart[existingIndex].quantity += 1;
@@ -484,7 +492,7 @@
                 product.images.forEach((imgSrc, idx) => {
                     const thumb = document.createElement('img');
                     thumb.src = imgSrc;
-                    thumb.alt = "صورة مصغرة للمنتج";
+                    thumb.alt = "صورة مصغرة بجودة عالية";
                     thumb.width = 56;
                     thumb.height = 56;
                     thumb.className = `w-14 h-14 object-contain rounded-2xl border-2 cursor-pointer bg-gray-950 p-1 transition ${idx === 0 ? 'border-cyan-400' : 'border-gray-800 hover:border-gray-600'}`;
@@ -518,7 +526,6 @@
             document.getElementById('cart-count').innerText = totalCount;
         }
 
-        // تفاعل زيادة ونقصان الكمية في السلة
         function changeQuantity(index, delta) {
             cart[index].quantity += delta;
             if (cart[index].quantity <= 0) {
@@ -540,16 +547,16 @@
             cart.forEach((item, index) => {
                 totalBHD += item.priceBHD * item.quantity;
                 const div = document.createElement('div');
-                div.className = "flex justify-between items-center bg-gray-900/80 p-3 rounded-2xl border border-gray-800 text-xs sm:text-sm";
+                div.className = "flex justify-between items-center bg-gray-900/90 p-3.5 rounded-2xl border border-gray-800 text-xs sm:text-sm";
                 div.innerHTML = `
                     <div class="flex-1 pr-2">
                         <h4 class="font-bold text-white mb-0.5">${item.name}</h4>
-                        <span class="text-cyan-400 font-bold">${formatPrice(item.priceBHD)}</span>
+                        <span class="text-cyan-300 font-bold">${formatPrice(item.priceBHD)}</span>
                     </div>
-                    <div class="flex items-center gap-2 bg-gray-950 px-2 py-1 rounded-xl border border-gray-800">
+                    <div class="flex items-center gap-2 bg-gray-950 px-2.5 py-1.5 rounded-xl border border-gray-800">
                         <button onclick="changeQuantity(${index}, -1)" class="text-red-400 font-black px-1.5 hover:text-red-300">-</button>
                         <span class="font-black text-white px-1">${item.quantity}</span>
-                        <button onclick="changeQuantity(${index}, 1)" class="text-cyan-400 font-black px-1.5 hover:text-cyan-300">+</button>
+                        <button onclick="changeQuantity(${index}, 1)" class="text-cyan-300 font-black px-1.5 hover:text-cyan-200">+</button>
                     </div>
                     <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 text-xs font-bold px-2.5 py-1 bg-red-500/10 rounded-xl mr-2">حذف</button>
                 `;
@@ -588,41 +595,41 @@
             const hasPhysical = itemsList.some(item => item.category === 'physical');
 
             let itemsSummary = itemsList.map(i => `${i.name} (الكمية: ${i.quantity})`).join('، ');
-            let formHTML = `<div class="bg-gray-900/80 p-3 rounded-2xl mb-3 border border-gray-800 text-xs text-gray-300">المنتجات المطلوبة: <span class="text-cyan-400 font-bold">${itemsSummary}</span></div>`;
+            let formHTML = `<div class="bg-gray-900/90 p-3 rounded-2xl mb-3 border border-gray-800 text-xs text-gray-200 font-medium">المنتجات المطلوبة: <span class="text-cyan-300 font-bold">${itemsSummary}</span></div>`;
 
             if(hasPhysical) {
                 formHTML += `
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">الاسم الكامل:</label>
+                        <label class="block text-xs font-bold text-gray-200 mb-1">الاسم الكامل:</label>
                         <input type="text" id="cust-name" required class="w-full bg-gray-950 border border-gray-800 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-cyan-500 outline-none shadow-inner" placeholder="أدخل اسمك الكامل">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">البريد الإلكتروني (يجب أن ينتهي بـ gmail.com):</label>
+                        <label class="block text-xs font-bold text-gray-200 mb-1">البريد الإلكتروني (يجب أن ينتهي بـ gmail.com):</label>
                         <input type="email" id="cust-email" required class="w-full bg-gray-950 border border-gray-800 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-cyan-500 outline-none shadow-inner" placeholder="example@gmail.com">
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-bold text-gray-300 mb-1">المنطقة:</label>
+                            <label class="block text-xs font-bold text-gray-200 mb-1">المنطقة:</label>
                             <input type="text" id="cust-region" required class="w-full bg-gray-950 border border-gray-800 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-cyan-500 outline-none shadow-inner" placeholder="مثال: المنامة">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-300 mb-1">رقم التواصل:</label>
+                            <label class="block text-xs font-bold text-gray-200 mb-1">رقم التواصل:</label>
                             <input type="tel" id="cust-phone" required class="w-full bg-gray-950 border border-gray-800 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-cyan-500 outline-none shadow-inner" placeholder="+973 ...">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">العنوان التفصيلي:</label>
+                        <label class="block text-xs font-bold text-gray-200 mb-1">العنوان التفصيلي:</label>
                         <textarea id="cust-address" required rows="2" class="w-full bg-gray-950 border border-gray-800 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-cyan-500 outline-none shadow-inner" placeholder="رقم المجمع، رقم الشارع، رقم المنزل..."></textarea>
                     </div>
                 `;
             } else {
                 formHTML += `
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">البريد الإلكتروني (يجب أن ينتهي بـ gmail.com):</label>
+                    `<div>
+                        <label class="block text-xs font-bold text-gray-200 mb-1">البريد الإلكتروني (يجب أن ينتهي بـ gmail.com):</label>
                         <input type="email" id="cust-email" required class="w-full bg-gray-950 border border-gray-800 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-cyan-500 outline-none shadow-inner" placeholder="example@gmail.com">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">رقم التواصل:</label>
+                        <label class="block text-xs font-bold text-gray-200 mb-1">رقم التواصل:</label>
                         <input type="tel" id="cust-phone" required class="w-full bg-gray-950 border border-gray-800 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-cyan-500 outline-none shadow-inner" placeholder="+973 ...">
                     </div>
                 `;
@@ -652,7 +659,7 @@
 
             if (hasPhysical) {
                 const region = document.getElementById('cust-region').value.trim();
-                const addressDetails = document.getElementById('cust-address').value.trim();
+                const addressDetails = document.getElementById('cust-address'].value.trim();
                 addressText = `${region} - ${addressDetails}`;
             }
 
