@@ -32,7 +32,6 @@
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
-        /* منع تشويش الصور وحفظ دقتها الأصلية وحيويتها */
         img {
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges;
@@ -268,14 +267,13 @@
         let currentCurrency = 'BHD';
         let currentSymbol = 'د.ب';
 
-        // حساب عمر المتجر تلقائياً منذ سبتمبر 2026 بدقة واضحة عالية الوضوح
         function updateStoreAge() {
-            const launchDate = new Date(2026, 8, 1); // 1 سبتمبر 2026
+            const launchDate = new Date(2026, 8, 1);
             const currentDate = new Date();
             let months = (currentDate.getFullYear() - launchDate.getFullYear()) * 12 + (currentDate.getMonth() - launchDate.getMonth());
             if (months < 1) months = 1;
             document.getElementById('store-age-text').innerText = `تأسس في سبتمبر 2026`;
-            document.getElementById('store-months-text').innerText = `مر أكثر من ${months}${months === 1 ? 'شهر' : 'شهور'} على الإطلاق`;
+            document.getElementById('store-months-text').innerText = `مر أكثر من ${months} ${months === 1 ? 'شهر' : 'شهور'} على الإطلاق`;
         }
 
         const products = [
@@ -348,7 +346,7 @@
 
         function formatPrice(priceInBHD) {
             const converted = priceInBHD * exchangeRates[currentCurrency].rate;
-            return `${converted.toFixed(3)}${currentSymbol}`;
+            return `${converted.toFixed(3)} ${currentSymbol}`;
         }
 
         function renderProducts(filter = 'all') {
@@ -396,7 +394,8 @@
                         </div>
                         <div class="p-4 sm:p-5">
                             <h3 class="text-base sm:text-lg font-bold text-white mb-2 cursor-pointer hover:text-cyan-300 transition" onclick="openZoomModal(${product.id})">${product.name}</h3>
-                            <p class="text-gray-200 text-xs sm:text-sm mb-3 leading-relaxed font-medium">${formattedDesc}</p>${stockBadge}
+                            <p class="text-gray-200 text-xs sm:text-sm mb-3 leading-relaxed font-medium">${formattedDesc}</p>
+                            ${stockBadge}
                         </div>
                     </div>
                     <div class="p-4 sm:p-5 pt-0 flex flex-col gap-3">
@@ -624,7 +623,7 @@
                 `;
             } else {
                 formHTML += `
-                    `<div>
+                    <div>
                         <label class="block text-xs font-bold text-gray-200 mb-1">البريد الإلكتروني (يجب أن ينتهي بـ gmail.com):</label>
                         <input type="email" id="cust-email" required class="w-full bg-gray-950 border border-gray-800 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-cyan-500 outline-none shadow-inner" placeholder="example@gmail.com">
                     </div>
@@ -659,7 +658,7 @@
 
             if (hasPhysical) {
                 const region = document.getElementById('cust-region').value.trim();
-                const addressDetails = document.getElementById('cust-address'].value.trim();
+                const addressDetails = document.getElementById('cust-address').value.trim();
                 addressText = `${region} - ${addressDetails}`;
             }
 
