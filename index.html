@@ -136,7 +136,7 @@
                 <span class="text-2xl">⏳</span>
                 <div class="text-right">
                     <h4 class="text-cyan-300 font-black text-xs sm:text-sm" id="store-age-text">تأسس في سبتمبر 2026</h4>
-                    <p class="text-gray-200 text-[11px] font-medium" id="store-months-text">مرت أشهر وأيام على إطلاق المتجر</p>
+                    <p class="text-gray-200 text-[11px] font-medium" id="store-months-text">جاري حساب الأيام...</p>
                 </div>
             </div>
             <div class="bg-[#111c38]/95 border border-cyan-500/30 rounded-2xl p-3.5 text-center shadow-lg trust-badge-anim flex items-center justify-center gap-3" style="animation-delay: 2s;">
@@ -267,28 +267,15 @@
         let currentCurrency = 'BHD';
         let currentSymbol = 'د.ب';
 
-        // حساب عمر المتجر تلقائياً بالشهور والأيام منذ 1 سبتمبر 2026 حسب توقيت البحرين
+        // حساب عمر المتجر تلقائياً باليوم منذ 1 سبتمبر 2026 
         function updateStoreAge() {
-            const launchDate = new Date(2026, 8, 1); // 1 سبتمبر 2026
+            const launchDate = new Date("2026-09-01T00:00:00"); 
             const currentDate = new Date();
+            const diffTime = Math.abs(currentDate - launchDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             
-            let diffTime = Math.abs(currentDate - launchDate);
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            let months = Math.floor(diffDays / 30);
-            let days = diffDays % 30;
-
-            let timeString = "";
-            if (months > 0) {
-                timeString += `${months} ${months === 1 ? 'شهر' : 'شهور'}`;
-            }
-            if (days > 0) {
-                if (timeString !== "") timeString += " و ";
-                timeString += `${days} ${days === 1 ? 'يوم' : 'أيام'}`;
-            }
-            if (timeString === "") timeString = "أقل من يوم";
-
             document.getElementById('store-age-text').innerText = `تأسس في سبتمبر 2026`;
-            document.getElementById('store-months-text').innerText = `مضى على إطلاق المتجر ${timeString} من التميز`;
+            document.getElementById('store-months-text').innerText = `مستمرون منذ ${diffDays} يوماً من التميز`;
         }
 
         const products = [
