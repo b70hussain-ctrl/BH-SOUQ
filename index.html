@@ -23,6 +23,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- مكتبات Firebase السحابية للعداد الحي -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
     <style>
         body { 
             font-family: 'Tajawal', sans-serif; 
@@ -255,8 +260,15 @@
         </div>
     </footer>
 
-    <!-- سكربت الجافاسكريبت والمنطق البرمجي -->
+    <!-- سكربت الجافاسكريبت والمنطق البرمجي مع ربط Firebase -->
     <script>
+        // إعدادات الاتصال بقاعدة بيانات Firebase الخاصة بك
+        const firebaseConfig = {
+            databaseURL: "https://bhsouq-b5ba6-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const dbRef = firebase.database().ref('salesCount');
+
         const exchangeRates = {
             BHD: { rate: 1.0, symbol: 'د.ب' },
             SAR: { rate: 9.96, symbol: 'ر.س' },
@@ -267,7 +279,6 @@
         let currentCurrency = 'BHD';
         let currentSymbol = 'د.ب';
 
-        // دالة تحديث عمر المتجر وتاريخ التأسيس بشكل ديناميكي
         function updateStoreAge() {
             const launchDate = new Date("2026-09-01T00:00:00"); 
             const currentDate = new Date();
@@ -278,14 +289,16 @@
             document.getElementById('store-months-text').innerText = `مستمرون منذ ${diffDays} يوماً من التميز`;
         }
 
-        // دالة التهيئة وإدارة عداد المبيعات (يبدأ من +20)
+        // الاستماع المباشر للعداد من سحابة جوجل ليتحدث عند الجميع فوراً
         function initSalesCounter() {
-            let count = parseInt(localStorage.getItem('bhsouq_sales_count'));
-            if (!count || count < 20) {
-                count = 20;
-                localStorage.setItem('bhsouq_sales_count', count);
-            }
-            document.getElementById('sales-counter-text').innerText = `+${count} عملية بيع ناجحة`;
+            dbRef.on('value', (snapshot) => {
+                let count = snapshot.val();
+                if (!count || count < 20) {
+                    count = 20;
+                    dbRef.set(20);
+                }
+                document.getElementById('sales-counter-text').innerText = `+${count} عملية بيع ناجحة`;
+            });
         }
 
         const products = [
@@ -677,13 +690,12 @@
             const itemsToOrder = isCartCheckout ? cart : [activeCheckoutItem];
             let orderTypeNames = itemsToOrder.map(i => `${i.name} (الكمية: ${i.quantity})`).join('، ');
 
-            // حساب الكمية الإجمالية في هذا الطلب وإضافتها لعداد المبيعات (بدءاً من 20)
+            // تحديث العداد في سيرفر جوجل السحابي بشكل حي وفوري للجميع
             const totalOrderQuantity = itemsToOrder.reduce((sum, item) => sum + item.quantity, 0);
-            let currentSalesCount = parseInt(localStorage.getItem('bhsouq_sales_count')) || 20;
-            if (currentSalesCount < 20) currentSalesCount = 20;
-            currentSalesCount += totalOrderQuantity;
-            localStorage.setItem('bhsouq_sales_count', currentSalesCount);
-            document.getElementById('sales-counter-text').innerText = `+${currentSalesCount} عملية بيع ناجحة`;
+            dbRef.transaction((currentCount) => {
+                let count = currentCount || 20;
+                return count + totalOrderQuantity;
+            });
 
             let whatsappMessage = `نوع الطلب: ${orderTypeNames} %0a`;
             whatsappMessage += `الإيميل: ${emailInput} %0a`;
